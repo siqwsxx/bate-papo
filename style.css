@@ -1,0 +1,270 @@
+:root {
+  --bg: #090d1b;
+  --primary: #1ff2fa;
+  --secondary: #162046;
+  --card: #1c233f;
+  --accent: #ab53ff;
+  --text: #d7e4f7;
+  --user: #16ffe1;
+  --msg-bg: #161932bb;
+  --msg-alt-bg: #171b38bb;
+  --status: #00ffc2;
+}
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #090d1b 0%, #231952 100%);
+  min-height: 100vh;
+  color: var(--text);
+  overflow-x: hidden;
+}
+.container {
+  max-width: 480px;
+  margin: 48px auto 0;
+  background: var(--card);
+  border-radius: 20px 20px 35px 35px;
+  box-shadow: 0 18px 52px #000a;
+  display: flex;
+  flex-direction: column;
+  min-height: 650px;
+  border: 2px solid #1ff2fa44;
+  position: relative;
+}
+header {
+  text-align: center;
+  padding: 27px 0 5px 0;
+  background: transparent;
+  border-radius: 20px 20px 0 0;
+}
+header h1 {
+  margin: 0 0 6px 0;
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 2.18rem;
+  letter-spacing: -1.5px;
+  color: var(--primary);
+  text-shadow: 0 1px 9px #07f9de3f;
+}
+header .futurista {
+  color: var(--accent);
+  letter-spacing: 1px;
+  font-family: 'Orbitron';
+  font-weight: 700;
+}
+.subtitle {
+  font-size: 1.02rem;
+  color: #afbcd1;
+  margin-bottom: 1.3rem;
+}
+main {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 2px;
+}
+ul#messages {
+  list-style: none;
+  margin: 0;
+  padding: 20px 18px 10px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+ul#messages li {
+  background: var(--msg-bg);
+  border-radius: 10px 16px 10px 16px / 12px 22px 14px 22px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 1em;
+  min-height: 36px;
+  box-shadow: 0 2px 14px #0ff7 0;
+  backdrop-filter: blur(2px);
+  border-left: 2.4px solid var(--primary);
+  animation: fadeIn 0.33s;
+  opacity: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  word-break: break-word;
+  transition: border 0.35s;
+}
+ul#messages li:nth-child(2n) {
+  background: var(--msg-alt-bg);
+  border-left-color: var(--accent);
+}
+ul#messages li .msg-user {
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.08em;
+  margin-right: 7px;
+  letter-spacing: 0.5px;
+  filter: brightness(1.1) drop-shadow(0 1px 2px #0002);
+  text-shadow: 0 2px 9px #0004;
+}
+ul#messages li .msg-text {
+  font-family: inherit;
+  font-size: 1em;
+  margin-left: 2px;
+  line-height: 1.28em;
+}
+
+ul#messages li.fade-in {
+  animation: fadeIn 0.35s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(22px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.status-msg {
+  text-align: left;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  margin: 0.3em 0 !important;
+  font-size: 0.98em !important;
+  color: var(--status) !important;
+  font-style: italic;
+  font-family: 'Inter',monospace;
+  letter-spacing: 0.04em;
+  float: left;
+  min-height: 0 !important;
+  padding: 2px 8px !important;
+}
+form {
+  display: flex;
+  border-top: 1px solid #15fff711;
+  padding: 12px 16px;
+  background: var(--secondary);
+  border-radius: 0 0 35px 35px;
+}
+form input {
+  flex: 1;
+  padding: 12px 13px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background: #192954;
+  color: var(--text);
+  margin-right: 12px;
+  box-shadow: 0 1px 2px #0004;
+  transition: background 0.18s;
+  border-bottom: 1.7px solid var(--accent);
+}
+form input:focus {
+  background: #262d4b;
+}
+form button {
+  background: var(--accent);
+  color: #fff;
+  padding: 0 22px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  box-shadow: 0 2px 16px #9f36fa33;
+  outline: none;
+  letter-spacing: 0.09em;
+  transition: background 0.19s, color 0.19s;
+}
+form button:hover, form button:focus {
+  background: var(--primary);
+  color: #2e0557;
+}
+footer {
+  text-align: center;
+  color: #81e7eb;
+  margin: 18px 0 14px;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 7px #0ff3;
+  user-select: none;
+}
+@media (max-width: 670px) {
+  .container {
+    border-radius: 0;
+    margin: 0;
+    min-height: 100vh;
+    max-width: 100vw;
+    box-shadow: none;
+  }
+  main, ul#messages, form {
+    padding-left: 3vw !important;
+    padding-right: 3vw !important;
+  }
+}
+/* Modal */
+.modal-bg {
+  position: fixed;
+  background: linear-gradient(150deg, #191b34 80%, #00fff155 120%);
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal {
+  background: #131628;
+  padding: 38px 32px 18px 32px;
+  border-radius: 22px;
+  box-shadow: 0 10px 64px #04fff326;
+  max-width: 92vw;
+  min-width: 240px;
+}
+.modal h2 {
+  color: var(--primary);
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-size: 1.3em;
+  margin-bottom: 1.1em;
+  letter-spacing: 0.04em;
+}
+#username-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1em;
+}
+#username-input {
+  background: #232862;
+  color: var(--user);
+  font-size: 1.08em;
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  border: 1.8px solid var(--accent);
+  border-radius: 9px;
+  padding: 13px 8px;
+  outline: none;
+  box-shadow: 0 1px 9px #00f4 0;
+  letter-spacing: 0.05em;
+  transition: border 0.18s;
+}
+#username-input.error {
+  border: 2px solid #f55 !important;
+  animation: shake 0.25s;
+}
+@keyframes shake {
+  0%{transform: translateX(0);}
+  18%{transform: translateX(7px);}
+  36%{transform: translateX(-7px);}
+  54%{transform: translateX(5px);}
+  72%{transform: translateX(-5px);}
+  90%{transform: translateX(2px);}
+  100%{transform: translateX(0);}
+}
+#username-form button {
+  background: linear-gradient(90deg, var(--primary) 74%, var(--accent) 100%);
+  color: #090d1b;
+  padding: 11px 0;
+  border-radius: 9px;
+  font-family: 'Orbitron', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.08em;
+  outline: none; border: none;
+  cursor: pointer;
+  margin-top: 4px;
+  box-shadow: 0 2px 9px #1ff2fa27;
+  transition: background 0.25s, color 0.16s;
+}
+#username-form button:hover, #username-form button:focus {
+  background: var(--accent);
+  color: #fff;
+}

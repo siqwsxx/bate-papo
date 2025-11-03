@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>💬 Bate-Papo Futurista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .modal-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 30, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+    }
+    .modal {
+      background: linear-gradient(145deg, #1c1c2b, #11111a);
+      border: 2px solid #00f0ff;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 0 30px #00f0ff;
+    }
+    .modal input {
+      padding: 10px;
+      margin-top: 15px;
+      width: 80%;
+      border: 1px solid #00f0ff;
+      border-radius: 8px;
+      background: #11111a;
+      color: #00f0ff;
+      font-size: 16px;
+      outline: none;
+    }
+    .modal button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #00f0ff;
+      color: #11111a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .modal button:hover {
+      box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+      transform: scale(1.05);
+    }
+    .container {
+      width: 90%;
+      max-width: 600px;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      background: rgba(20, 20, 40, 0.9);
+      border: 2px solid #00f0ff;
+      border-radius: 15px;
+      box-shadow: 0 0 40px #00f0ff;
+      overflow: hidden;
+      display: none;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #00f0ff, #ff00f0);
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00f0;
+    }
+    header .subtitle {
+      color: #00f0ff;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    main {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+    }
+    #messages {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #messages li {
+      margin-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .msg-user {
+      font-weight: bold;
+      margin-right: 10px;
+      text-shadow: 0 0 5px #fff;
+    }
+    .msg-text {
+      background: rgba(0, 240, 255, 0.1);
+      padding: 5px 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00f0ff;
+    }
+    .status-msg {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.7;
+    }
+    form {
+      display: flex;
+      border-top: 2px solid #00f0ff;
+      padding: 10px;
+      background: rgba(0,0,0,0.6);
+    }
+    form input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      background: rgba(0,0,0,0.3);
+      color: #00f0ff;
+    }
+    form button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #ff00f0;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    form button:hover {
+      box-shadow: 0 0 15px #ff00f0, 0 0 30px #ff00f0;
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      padding: 8px;
+      color: #00f0ff;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(10px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="modal-bg" id="modal-bg">
+    <div class="modal" id="modal">
+      <h2>Escolha seu nome</h2>
+      <form id="username-form">
+        <input type="text" id="username-input" maxlength="18" placeholder="Digite seu nome futurista..." autocomplete="off" required/>
+        <button>Acessar Chat 🚀</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container" id="chat-container">
+    <header>
+      <h1>💬 Bate-Papo <span class="futurista">Futurista</span></h1>
+      <p class="subtitle">Encontre e converse com pessoas do futuro!</p>
+    </header>
+    <main>
+      <ul id="messages"></ul>
+    </main>
+    <form id="form" autocomplete="off">
+      <input id="input" maxlength="200" placeholder="Digite sua mensagem..." autocomplete="off"/>
+      <button tabindex="0">Enviar</button>
+    </form>
+    <footer>
+      <span>🌐 Powered by Node.js + Socket.IO + Copilot</span>
+    </footer>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    function stringToColor(str) {
+      let h=0,s=85,l=53;
+      for(let i=0;i<str.length;i++) h = str.charCodeAt(i) + ((h << 5) - h);
+      h = (h % 360 + 360)%360;
+      return `hsl(${h},${s}%,${l}%)`;
+    }
+
+    let userName = '';
+    const modalBg = document.getElementById('modal-bg');
+    const modal = document.getElementById('modal');
+    const usernameForm = document.getElementById('username-form');
+    const usernameInput = document.getElementById('username-input');
+    const chatContainer = document.getElementById('chat-container');
+
+    usernameForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = usernameInput.value.trim();
+      if(name.length > 2){
+        userName = name;
+        localStorage.setItem('futurista_username', name);
+        modalBg.style.display = 'none';
+        chatContainer.style.display = 'flex';
+        startChat();
+      } else {
+        usernameInput.classList.add("error");
+      }
+    });
+
+    window.onload = function() {
+      const lastUser = localStorage.getItem('futurista_username');
+      if(lastUser) {
+        userName = lastUser;
+        modalBg.style.display = 'none';
+        chatContainer.style.display = 'flex';
+        startChat();
+      } else {
+        modalBg.style.display = 'flex';
+        chatContainer.style.display = 'none';
+        usernameInput.focus();
+      }
+    };
+
+    function sanitizeHTML(s){
+      const el = document.createElement('span');
+      el.innerText = s;
+      return el.innerHTML;
+    }
+
+    function startChat() {
+      var socket = io();
+      socket.emit('set username', userName);
+
+      var form = document.getElementById('form');
+      var input = document.getElementById('input');
+      var messages = document.getElementById('messages');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value.trim()) {
+          socket.emit('chat message', input.value.trim());
+          input.value = '';
+        }
+      });
+
+      socket.on('chat message', function(data){
+        const { user, text } = data;
+        const item = document.createElement('li');
+        item.innerHTML = `<span class="msg-user" style="color:${stringToColor(user)}">${sanitizeHTML(user)}</span><span class="msg-text">${sanitizeHTML(text)}</span>`;
+        messages.appendChild(item);
+        item.classList.add('fade-in');
+        messages.scrollTop = messages.scrollHeight;
+        clearMsgBuffer();
+      });
+
+      socket.on('status', function(data){
+        if(data.type === 'authfail') {
+          alert(data.msg || 'Nome de usuário inválido.');
+          localStorage.removeItem('futurista_username');
+          location.reload();
+          return;
+        }
+        if(data.type === 'ratelimit') {
+          input.disabled = true;
+          input.placeholder = data.msg || 'Aguarde...';
+          setTimeout(() => {
+            input.disabled = false;
+            input.placeholder = "Digite sua mensagem...";
+          }, 900);
+          return;
+        }
+        const li = document.createElement('li');
+        li.className = 'status-msg';
+        if(data.type=='join'){
+          li.innerHTML = `<span style="color:${stringToColor(data.user)}">${sanitizeHTML(data.user)}</span> entrou no chat 👾`;
+        } else if(data.type=='leave'){
+          li.innerHTML = `<span style="color:${stringToColor(data.user)}">${sanitizeHTML(data.user)}</span> saiu do chat 💤`;
+        }
+        messages.appendChild(li);
+        messages.scrollTop = messages.scrollHeight;
+        clearMsgBuffer();
+      });
+
+      function clearMsgBuffer() {
+        while (messages.children.length > 100) {
+          messages.removeChild(messages.firstChild)
+        }
+      }
+    }
+  </script>
+</body>
+</html>
